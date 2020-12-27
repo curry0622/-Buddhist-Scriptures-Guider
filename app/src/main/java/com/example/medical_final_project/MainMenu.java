@@ -6,7 +6,6 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 public class MainMenu extends AppCompatActivity {
 
     private Button nameRecBtn, contentRecBtn, searchBtn, enterBtn;
-    private TextView nameResTxt, contentRecTxt, searchResTxt;
+    private TextView nameResTxt, contentResTxt, searchResTxt;
     private SpeechRecognizer recognizer;
 
     @Override
@@ -41,7 +40,7 @@ public class MainMenu extends AppCompatActivity {
         searchBtn = findViewById(R.id.searchBtn);
         enterBtn = findViewById(R.id.enterBtn);
         nameResTxt = findViewById(R.id.nameResTxt);
-        contentRecTxt = findViewById(R.id.contentResTxt);
+        contentResTxt = findViewById(R.id.contentResTxt);
         searchResTxt = findViewById(R.id.searchResTxt);
     }
 
@@ -53,6 +52,7 @@ public class MainMenu extends AppCompatActivity {
         nameRecBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nameResTxt.setText("辨識中...");
                 checkPermission();
                 startListening();
                 recognize("name");
@@ -62,6 +62,7 @@ public class MainMenu extends AppCompatActivity {
         contentRecBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                contentResTxt.setText("辨識中...");
                 checkPermission();
                 startListening();
                 recognize("content");
@@ -71,6 +72,9 @@ public class MainMenu extends AppCompatActivity {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // search for scripture's name if nameResTxt != "辨識失敗"
+                String scriptureNames[] = {};
+                // search for specific scripture's content if contentResTxt != "辨識失敗"
                 enterBtn.setVisibility(View.VISIBLE);
             }
         });
@@ -128,6 +132,11 @@ public class MainMenu extends AppCompatActivity {
 
             @Override
             public void onError(int i) {
+                if(type.equals("name")) {
+                    nameResTxt.setText("辨識失敗");
+                } else {
+                    contentResTxt.setText("辨識失敗");
+                }
                 Toast.makeText(MainMenu.this, "辨識失敗，請檢查網路連線後再試一次", Toast.LENGTH_SHORT).show();
             }
 
@@ -138,7 +147,7 @@ public class MainMenu extends AppCompatActivity {
                 if(type.equals("name")) {
                     nameResTxt.setText(result);
                 } else {
-                    contentRecTxt.setText(result);
+                    contentResTxt.setText(result);
                 }
             }
 
