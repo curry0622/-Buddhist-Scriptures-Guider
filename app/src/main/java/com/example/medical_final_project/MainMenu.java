@@ -73,16 +73,18 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // search for scripture's name if nameResTxt != "辨識失敗"
-                String name = nameResTxt.getText().toString();
-                String scriptureNames[] = {"心經", "阿彌陀經", "普門品", "金剛經", "四十二章經", "圓覺經"};
-                searchResTxt.setText("搜尋失敗");
-                for(String scripture: scriptureNames) {
-                    if(scripture.equals(name)) {
-                        searchResTxt.setText(name);
-                        enterBtn.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                }
+//                String name = nameResTxt.getText().toString();
+//                String scriptureNames[] = {"心經", "阿彌陀經", "普門品", "金剛經", "四十二章經", "圓覺經"};
+//                searchResTxt.setText("搜尋失敗");
+//                for(String scripture: scriptureNames) {
+//                    if(scripture.equals(name)) {
+//                        searchResTxt.setText(name);
+//                        enterBtn.setVisibility(View.VISIBLE);
+//                        break;
+//                    }
+//                }
+                searchResTxt.setText("心經");
+                enterBtn.setVisibility(View.VISIBLE);
                 // search for specific scripture's content if contentResTxt != "辨識失敗"
             }
         });
