@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu">
+    tools:context=".GuideReadingPage">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H0"
@@ -160,99 +160,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="1.0"/>
 
-    <TextView
-        android:id="@+id/titleTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="佛經語音搜尋"
-        android:textSize="40dp"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintLeft_toLeftOf="@id/V10"
-        app:layout_constraintRight_toRightOf="@id/V90"
-        app:layout_constraintTop_toTopOf="@id/H10"
-        app:layout_constraintBottom_toBottomOf="@id/H20"/>
-
     <Button
-        android:id="@+id/nameRecBtn"
+        android:id="@+id/backBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="佛經篇章語音辨識"
+        android:text="返回"
         android:textSize="24dp"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H20"
-        app:layout_constraintBottom_toBottomOf="@id/H30"/>
-
-    <TextView
-        android:id="@+id/nameResTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="- 辨識結果 -"
-        android:textSize="22dp"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintLeft_toLeftOf="@id/V20"
-        app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H30"
-        app:layout_constraintBottom_toBottomOf="@id/H40"/>
-
-    <Button
-        android:id="@+id/contentRecBtn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="佛經片段語音辨識"
-        android:textSize="24dp"
-        app:layout_constraintLeft_toLeftOf="@id/V20"
-        app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H40"
-        app:layout_constraintBottom_toBottomOf="@id/H50"/>
-
-    <TextView
-        android:id="@+id/contentResTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="- 辨識結果 -"
-        android:textSize="22dp"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintLeft_toLeftOf="@id/V20"
-        app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H50"
-        app:layout_constraintBottom_toBottomOf="@id/H60"/>
-
-    <Button
-        android:id="@+id/searchBtn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="搜尋"
-        android:textSize="24dp"
-        app:layout_constraintLeft_toLeftOf="@id/V30"
-        app:layout_constraintRight_toLeftOf="@id/V70"
-        app:layout_constraintTop_toTopOf="@id/H60"
-        app:layout_constraintBottom_toBottomOf="@id/H70"/>
-
-    <TextView
-        android:id="@+id/searchResTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="- 搜尋結果 -"
-        android:textSize="22dp"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintLeft_toLeftOf="@id/V20"
-        app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H70"
-        app:layout_constraintBottom_toBottomOf="@id/H80"/>
-
-    <Button
-        android:id="@+id/enterBtn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="進入導讀"
-        android:textSize="24dp"
-        app:layout_constraintLeft_toLeftOf="@id/V30"
-        app:layout_constraintRight_toLeftOf="@id/V70"
         app:layout_constraintTop_toTopOf="@id/H80"
         app:layout_constraintBottom_toBottomOf="@id/H90"/>
 
