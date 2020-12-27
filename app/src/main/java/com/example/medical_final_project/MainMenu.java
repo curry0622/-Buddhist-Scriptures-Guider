@@ -30,7 +30,7 @@ public class MainMenu extends AppCompatActivity {
 
         // my functions
         findObjects();
-        initialSetUp();
+        initialSetup();
         btnOnClick();
     }
 
@@ -44,7 +44,7 @@ public class MainMenu extends AppCompatActivity {
         searchResTxt = findViewById(R.id.searchResTxt);
     }
 
-    public void initialSetUp() {
+    public void initialSetup() {
         enterBtn.setVisibility(View.INVISIBLE);
     }
 
@@ -73,9 +73,17 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // search for scripture's name if nameResTxt != "辨識失敗"
-                String scriptureNames[] = {};
+                String name = nameResTxt.getText().toString();
+                String scriptureNames[] = {"心經", "阿彌陀經", "普門品", "金剛經", "四十二章經", "圓覺經"};
+                searchResTxt.setText("搜尋失敗");
+                for(String scripture: scriptureNames) {
+                    if(scripture.equals(name)) {
+                        searchResTxt.setText(name);
+                        enterBtn.setVisibility(View.VISIBLE);
+                        break;
+                    }
+                }
                 // search for specific scripture's content if contentResTxt != "辨識失敗"
-                enterBtn.setVisibility(View.VISIBLE);
             }
         });
 
@@ -83,6 +91,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
+                intent.putExtra("scripture name", searchResTxt.getText().toString());
                 intent.setClass(MainMenu.this, GuideReadingPage.class);
                 startActivity(intent);
             }
