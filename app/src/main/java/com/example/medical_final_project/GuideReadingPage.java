@@ -6,7 +6,6 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,11 +18,12 @@ import java.util.ArrayList;
 
 public class GuideReadingPage extends AppCompatActivity {
 
-    private String scriptureName, fileName;
-    private ArrayList<String> content = new ArrayList<>();
+    private String scriptureName, scriptureFileName, vernacularFileName;
+    private ArrayList<String> scriptureContent = new ArrayList<>();
+    private ArrayList<String> vernacularContent = new ArrayList<>();
     private int index = 0;
 
-    private TextView titleTxt, contentTxt, vernacularTxt;
+    private TextView titleTxt, contentTxt, vernacularTxt, pageTxt;
     private Button prevBtn, nextBtn, chiSynBtn, taiSynBtn, backBtn;
 
     @Override
@@ -44,6 +44,7 @@ public class GuideReadingPage extends AppCompatActivity {
         titleTxt = findViewById(R.id.titleTxt);
         contentTxt = findViewById(R.id.contentTxt);
         vernacularTxt = findViewById(R.id.vernacularTxt);
+        pageTxt = findViewById(R.id.pageTxt);
         prevBtn = findViewById(R.id.prevBtn);
         nextBtn = findViewById(R.id.nextBtn);
         chiSynBtn = findViewById(R.id.chiSynBtn);
@@ -54,10 +55,12 @@ public class GuideReadingPage extends AppCompatActivity {
     public void initialSetup() {
         titleTxt.setText(scriptureName);
         determineFileName();
-        if(!fileName.equals("failed")) {
+        if(!scriptureFileName.equals("failed") && !vernacularFileName.equals("failed")) {
             checkPermission();
             loadContent();
-            contentTxt.setText(content.get(index));
+            contentTxt.setText(scriptureContent.get(index));
+            vernacularTxt.setText(vernacularContent.get(index));
+            setPage();
         } else {
             Toast.makeText(GuideReadingPage.this, "無法開啟佛經內容", Toast.LENGTH_SHORT).show();
             finish();
@@ -77,7 +80,9 @@ public class GuideReadingPage extends AppCompatActivity {
             public void onClick(View view) {
                 if(index > 0) {
                     index -= 1;
-                    contentTxt.setText(content.get(index));
+                    contentTxt.setText(scriptureContent.get(index));
+                    vernacularTxt.setText(vernacularContent.get(index));
+                    setPage();
                 }
             }
         });
@@ -85,9 +90,11 @@ public class GuideReadingPage extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(index < content.size() - 1) {
+                if(index < scriptureContent.size() - 1) {
                     index += 1;
-                    contentTxt.setText(content.get(index));
+                    contentTxt.setText(scriptureContent.get(index));
+                    vernacularTxt.setText(vernacularContent.get(index));
+                    setPage();
                 }
             }
         });
@@ -101,39 +108,57 @@ public class GuideReadingPage extends AppCompatActivity {
     }
 
     public void determineFileName() {
-        fileName = "failed";
+        scriptureFileName = "failed";
+        vernacularFileName = "failed";
         switch (scriptureName) {
             case "心經":
-                fileName = "o_heart.txt";
+                scriptureFileName = "o_heart.txt";
+                vernacularFileName = "v_heart.txt";
                 break;
             case "阿彌陀經":
-                fileName = "o_amito.txt";
+                scriptureFileName = "o_amito.txt";
                 break;
             case "普門品":
-                fileName = "o_pumen.txt";
+                scriptureFileName = "o_pumen.txt";
                 break;
             case "金剛經":
-                fileName = "o_kingkong.txt";
+                scriptureFileName = "o_kingkong.txt";
                 break;
             case "四十二章經":
-                fileName = "o_42.txt";
+                scriptureFileName = "o_42.txt";
                 break;
             case "圓覺經":
-                fileName = "o_circle.txt";
+                scriptureFileName = "o_circle.txt";
                 break;
         }
     }
 
     public void loadContent() {
+        // read scripture file
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(fileName)));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(scriptureFileName)));
             String lineText = "";
-            while ((lineText = reader.readLine()) != null) {
-                content.add(lineText);
+            while((lineText = reader.readLine()) != null) {
+                scriptureContent.add(lineText);
             }
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(GuideReadingPage.this, "無法開啟" + fileName, Toast.LENGTH_SHORT).show();
+            Toast.makeText(GuideReadingPage.this, "無法開啟" + scriptureFileName, Toast.LENGTH_SHORT).show();
         }
+        // read vernacular file
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(vernacularFileName)));
+            String lineText = "";
+            while((lineText = reader.readLine()) != null) {
+                vernacularContent.add(lineText);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(GuideReadingPage.this, "無法開啟" + vernacularFileName, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void setPage() {
+        pageTxt.setText(String.valueOf(index + 1) + " / " + String.valueOf(scriptureContent.size()));
     }
 }
