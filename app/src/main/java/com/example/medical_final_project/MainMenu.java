@@ -10,11 +10,16 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MainMenu extends AppCompatActivity {
@@ -22,6 +27,8 @@ public class MainMenu extends AppCompatActivity {
     private Button nameRecBtn, contentRecBtn, searchBtn, enterBtn;
     private TextView nameResTxt, contentResTxt, searchResTxt;
     private SpeechRecognizer recognizer;
+
+    private String recType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,8 @@ public class MainMenu extends AppCompatActivity {
         nameRecBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                recType = "name";
+                contentRecBtn.setVisibility(View.INVISIBLE);
                 nameResTxt.setText("辨識中...");
                 checkPermission();
                 startListening();
@@ -62,6 +71,8 @@ public class MainMenu extends AppCompatActivity {
         contentRecBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                recType = "content";
+                nameRecBtn.setVisibility(View.INVISIBLE);
                 contentResTxt.setText("辨識中...");
                 checkPermission();
                 startListening();
@@ -83,8 +94,17 @@ public class MainMenu extends AppCompatActivity {
 //                        break;
 //                    }
 //                }
-                searchResTxt.setText("心經");
-                enterBtn.setVisibility(View.VISIBLE);
+
+                Pair<String, Integer> result = search("長老須菩提在大眾中即從座起");
+                recType = "content";
+                if(!result.first.equals("None")) {
+                    searchResTxt.setText(result.first + "\n第" + String.valueOf(result.second + 1) + "句");
+                    enterBtn.setVisibility(View.VISIBLE);
+                } else {
+                    searchResTxt.setText("搜尋失敗");
+                }
+
+
                 // search for specific scripture's content if contentResTxt != "辨識失敗"
             }
         });
@@ -172,5 +192,138 @@ public class MainMenu extends AppCompatActivity {
 
             }
         });
+    }
+
+    public Pair<String, Integer> search(String str) {
+        Pair<String, Integer> result = new Pair<>("None", 0);
+        if(recType == "name") {
+            String scriptureNames[] = {"心經", "阿彌陀經", "普門品", "金剛經", "四十二章經", "圓覺經"};
+            for(String scripture: scriptureNames) {
+                if(scripture.equals(str)) {
+                    result = new Pair<>(str, 0);
+                    break;
+                }
+            }
+        } else if(recType == "content") {
+            checkPermission();
+            Boolean found = false;
+            for(int i = 0; i < 6; i++) {
+                if(found) {
+                    break;
+                }
+                switch(i) {
+                    case 0:
+                        try {
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("o_42.txt")));
+                            String lineText = "";
+                            int index = 0;
+                            while((lineText = reader.readLine()) != null) {
+                                Log.d("心經", lineText);
+                                if(lineText.equals(str)) {
+                                    found = true;
+                                    result = new Pair<>("四十二章經", index);
+                                    break;
+                                }
+                                index += 1;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainMenu.this, "IOExecption", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 1:
+                        try {
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("o_amito.txt")));
+                            String lineText = "";
+                            int index = 0;
+                            while((lineText = reader.readLine()) != null) {
+                                if(lineText.equals(str)) {
+                                    found = true;
+                                    result = new Pair<>("阿彌陀經", index);
+                                    break;
+                                }
+                                index += 1;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainMenu.this, "IOExecption", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 2:
+                        try {
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("o_circle.txt")));
+                            String lineText = "";
+                            int index = 0;
+                            while((lineText = reader.readLine()) != null) {
+                                if(lineText.equals(str)) {
+                                    found = true;
+                                    result = new Pair<>("圓覺經", index);
+                                    break;
+                                }
+                                index += 1;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainMenu.this, "IOExecption", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 3:
+                        try {
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("o_heart.txt")));
+                            String lineText = "";
+                            int index = 0;
+                            while((lineText = reader.readLine()) != null) {
+                                if(lineText.equals(str)) {
+                                    found = true;
+                                    result = new Pair<>("心經", index);
+                                    break;
+                                }
+                                index += 1;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainMenu.this, "IOExecption", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 4:
+                        try {
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("o_kingkong.txt")));
+                            String lineText = "";
+                            int index = 0;
+                            while((lineText = reader.readLine()) != null) {
+                                if(lineText.equals(str)) {
+                                    found = true;
+                                    result = new Pair<>("金剛經", index);
+                                    break;
+                                }
+                                index += 1;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainMenu.this, "IOExecption", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 5:
+                        try {
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("o_pumen.txt")));
+                            String lineText = "";
+                            int index = 0;
+                            while((lineText = reader.readLine()) != null) {
+                                if(lineText.equals(str)) {
+                                    found = true;
+                                    result = new Pair<>("普門品", index);
+                                    break;
+                                }
+                                index += 1;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainMenu.this, "IOExecption", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+            }
+        }
+        return result;
     }
 }
