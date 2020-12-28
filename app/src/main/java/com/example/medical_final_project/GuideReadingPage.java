@@ -6,6 +6,8 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class GuideReadingPage extends AppCompatActivity {
 
@@ -22,6 +25,7 @@ public class GuideReadingPage extends AppCompatActivity {
     private ArrayList<String> scriptureContent = new ArrayList<>();
     private ArrayList<String> vernacularContent = new ArrayList<>();
     private int index = 0;
+    private TextToSpeech chiTTS;
 
     private TextView titleTxt, contentTxt, vernacularTxt, pageTxt;
     private Button prevBtn, nextBtn, chiSynBtn, taiSynBtn, backBtn;
@@ -98,6 +102,14 @@ public class GuideReadingPage extends AppCompatActivity {
                 }
             }
         });
+
+        chiSynBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chiTTS = initChiTTS();
+                talk(scriptureContent.get(index));
+            }
+        });
     }
 
     public void checkPermission() {
@@ -160,5 +172,33 @@ public class GuideReadingPage extends AppCompatActivity {
 
     public void setPage() {
         pageTxt.setText(String.valueOf(index + 1) + " / " + String.valueOf(scriptureContent.size()));
+    }
+
+    public TextToSpeech initChiTTS() {
+        chiTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS) {
+                    chiTTS.setPitch((float)1.0);
+                    chiTTS.setSpeechRate((float)0.7);
+                    Locale locale = Locale.TAIWAN;
+                    if(chiTTS.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                        chiTTS.setLanguage(locale);
+                    }
+                }
+            }
+        });
+        return chiTTS;
+    }
+
+    public void talk(String statement) {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                chiTTS.speak(statement, TextToSpeech.QUEUE_FLUSH, null);
+                while(chiTTS.isSpeaking()){}
+            }
+        }, 1500);
     }
 }
