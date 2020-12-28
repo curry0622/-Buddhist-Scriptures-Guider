@@ -183,7 +183,7 @@ public class GuideReadingPage extends AppCompatActivity {
                 break;
             case "圓覺經":
                 scriptureFileName = "o_circle.txt";
-                vernacularFileName = "v_circle.txt";
+                vernacularFileName = "v_heart.txt";
                 break;
         }
     }
