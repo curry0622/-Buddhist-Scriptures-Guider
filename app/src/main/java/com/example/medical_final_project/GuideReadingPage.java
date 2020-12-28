@@ -167,18 +167,23 @@ public class GuideReadingPage extends AppCompatActivity {
                 break;
             case "阿彌陀經":
                 scriptureFileName = "o_amito.txt";
+                vernacularFileName = "v_amito.txt";
                 break;
             case "普門品":
                 scriptureFileName = "o_pumen.txt";
+                vernacularFileName = "v_pumen.txt";
                 break;
             case "金剛經":
                 scriptureFileName = "o_kingkong.txt";
+                vernacularFileName = "v_kingkong.txt";
                 break;
             case "四十二章經":
                 scriptureFileName = "o_42.txt";
+                vernacularFileName = "v_42.txt";
                 break;
             case "圓覺經":
                 scriptureFileName = "o_circle.txt";
+                vernacularFileName = "v_circle.txt";
                 break;
         }
     }
