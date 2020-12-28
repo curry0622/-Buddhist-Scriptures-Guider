@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class GuideReadingPage extends AppCompatActivity {
 
@@ -26,6 +28,11 @@ public class GuideReadingPage extends AppCompatActivity {
     private ArrayList<String> vernacularContent = new ArrayList<>();
     private int index = 0;
     private TextToSpeech chiTTS;
+
+    // Taiwanese synthesis
+    private MediaPlayer mediaPlayer;
+    private TaiwaneseSynthesis taiwaneseSynthesis;
+    private String wav_path;
 
     private TextView titleTxt, contentTxt, vernacularTxt, pageTxt;
     private Button prevBtn, nextBtn, chiSynBtn, taiSynBtn, backBtn;
@@ -110,12 +117,42 @@ public class GuideReadingPage extends AppCompatActivity {
                 talk(scriptureContent.get(index));
             }
         });
+
+        taiSynBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                taiwaneseSynthesis = new TaiwaneseSynthesis();
+                try {
+                    wav_path = taiwaneseSynthesis.execute(scriptureContent.get(index)).get();
+                    mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setDataSource(wav_path);
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mediaPlayer.release();
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Toast.makeText(GuideReadingPage.this, "InterruptedException", Toast.LENGTH_SHORT).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                    Toast.makeText(GuideReadingPage.this, "ExecutionException", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(GuideReadingPage.this, "IOException", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void checkPermission() {
         int readPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if(readPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(GuideReadingPage.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        int writePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if(readPermission != PackageManager.PERMISSION_GRANTED ||writePermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(GuideReadingPage.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
     }
 
@@ -199,6 +236,6 @@ public class GuideReadingPage extends AppCompatActivity {
                 chiTTS.speak(statement, TextToSpeech.QUEUE_FLUSH, null);
                 while(chiTTS.isSpeaking()){}
             }
-        }, 1500);
+        }, 1000);
     }
 }
