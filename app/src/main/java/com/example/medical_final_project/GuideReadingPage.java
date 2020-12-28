@@ -44,6 +44,7 @@ public class GuideReadingPage extends AppCompatActivity {
 
         // get intent extra
         scriptureName = getIntent().getStringExtra("scripture name");
+        index = getIntent().getIntExtra("index", 0);
 
         // my functions
         findObjects();

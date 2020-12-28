@@ -14,6 +14,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,10 +26,13 @@ import java.util.ArrayList;
 public class MainMenu extends AppCompatActivity {
 
     private Button nameRecBtn, contentRecBtn, searchBtn, enterBtn;
+    private ImageButton resetBtn;
     private TextView nameResTxt, contentResTxt, searchResTxt;
     private SpeechRecognizer recognizer;
 
     private String recType = "";
+    private String scriptureName = "";
+    private int index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class MainMenu extends AppCompatActivity {
         contentRecBtn = findViewById(R.id.contentRecBtn);
         searchBtn = findViewById(R.id.searchBtn);
         enterBtn = findViewById(R.id.enterBtn);
+        resetBtn = findViewById(R.id.resetBtn);
         nameResTxt = findViewById(R.id.nameResTxt);
         contentResTxt = findViewById(R.id.contentResTxt);
         searchResTxt = findViewById(R.id.searchResTxt);
@@ -83,29 +88,23 @@ public class MainMenu extends AppCompatActivity {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // search for scripture's name if nameResTxt != "辨識失敗"
-//                String name = nameResTxt.getText().toString();
-//                String scriptureNames[] = {"心經", "阿彌陀經", "普門品", "金剛經", "四十二章經", "圓覺經"};
-//                searchResTxt.setText("搜尋失敗");
-//                for(String scripture: scriptureNames) {
-//                    if(scripture.equals(name)) {
-//                        searchResTxt.setText(name);
-//                        enterBtn.setVisibility(View.VISIBLE);
-//                        break;
-//                    }
-//                }
-
-                Pair<String, Integer> result = search("長老須菩提在大眾中即從座起");
-                recType = "content";
+                String strToSearch = "";
+                if(recType == "name") {
+                    strToSearch = nameResTxt.getText().toString();
+                } else if(recType == "content") {
+                    strToSearch = contentResTxt.getText().toString();
+                }
+                searchResTxt.setText("搜尋中...");
+                Pair<String, Integer> result = search(strToSearch);
                 if(!result.first.equals("None")) {
+                    scriptureName = result.first;
+                    index = result.second;
                     searchResTxt.setText(result.first + "\n第" + String.valueOf(result.second + 1) + "句");
                     enterBtn.setVisibility(View.VISIBLE);
                 } else {
                     searchResTxt.setText("搜尋失敗");
+                    Toast.makeText(MainMenu.this, recType, Toast.LENGTH_SHORT).show();
                 }
-
-
-                // search for specific scripture's content if contentResTxt != "辨識失敗"
             }
         });
 
@@ -113,9 +112,17 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("scripture name", searchResTxt.getText().toString());
+                intent.putExtra("scripture name", scriptureName);
+                intent.putExtra("index", index);
                 intent.setClass(MainMenu.this, GuideReadingPage.class);
                 startActivity(intent);
+            }
+        });
+
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recreate();
             }
         });
     }
@@ -218,7 +225,6 @@ public class MainMenu extends AppCompatActivity {
                             String lineText = "";
                             int index = 0;
                             while((lineText = reader.readLine()) != null) {
-                                Log.d("心經", lineText);
                                 if(lineText.equals(str)) {
                                     found = true;
                                     result = new Pair<>("四十二章經", index);

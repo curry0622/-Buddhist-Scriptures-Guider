@@ -140,11 +140,25 @@
         app:layout_constraintGuide_percent="0.70"/>
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/V75"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75"/>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/V80"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.80"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/V85"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/V90"
@@ -229,6 +243,18 @@
         android:textSize="24dp"
         app:layout_constraintLeft_toLeftOf="@id/V30"
         app:layout_constraintRight_toLeftOf="@id/V70"
+        app:layout_constraintTop_toTopOf="@id/H60"
+        app:layout_constraintBottom_toBottomOf="@id/H70"/>
+
+    <ImageButton
+        android:id="@+id/resetBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/reset"
+        android:scaleType="fitCenter"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/V75"
+        app:layout_constraintRight_toRightOf="@id/V85"
         app:layout_constraintTop_toTopOf="@id/H60"
         app:layout_constraintBottom_toBottomOf="@id/H70"/>
 
