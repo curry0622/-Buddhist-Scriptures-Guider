@@ -193,6 +193,7 @@
         android:fontFamily="@font/buddhist"
         android:text="開始"
         android:textSize="24dp"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
         app:layout_constraintTop_toTopOf="@id/H70"
