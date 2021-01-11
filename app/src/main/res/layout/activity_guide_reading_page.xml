@@ -14,11 +14,25 @@
         app:layout_constraintGuide_percent="0"/>
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05"/>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.10"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H15"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H20"
@@ -28,11 +42,25 @@
         app:layout_constraintGuide_percent="0.20"/>
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H25"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H30"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.30"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H35"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H40"
@@ -42,11 +70,25 @@
         app:layout_constraintGuide_percent="0.40"/>
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H45"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45"/>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H50"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.50"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H55"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H60"
@@ -56,11 +98,32 @@
         app:layout_constraintGuide_percent="0.60"/>
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H65"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65"/>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H70"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.70"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H725"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.725"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H75"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H80"
@@ -70,11 +133,39 @@
         app:layout_constraintGuide_percent="0.80"/>
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H825"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.825"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H85"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85"/>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H90"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.90"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H925"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.925"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/H95"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/H100"
@@ -160,42 +251,55 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="1.0"/>
 
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/scripturebg"
+        app:layout_constraintLeft_toLeftOf="@id/V0"
+        app:layout_constraintRight_toRightOf="@id/V100"
+        app:layout_constraintTop_toTopOf="@id/H0"
+        app:layout_constraintBottom_toBottomOf="@id/H100"/>
+
     <TextView
         android:id="@+id/titleTxt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="佛經標題"
-        android:textSize="40dp"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal"
+        android:textSize="44dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:fontFamily="@font/buddhist"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H10"
-        app:layout_constraintBottom_toBottomOf="@id/H20"/>
+        app:layout_constraintTop_toTopOf="@id/H5"
+        app:layout_constraintBottom_toBottomOf="@id/H15"/>
 
     <TextView
         android:id="@+id/contentTxt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="佛經句子"
-        android:textSize="20dp"
+        android:textSize="26dp"
         android:gravity="center"
+        android:fontFamily="@font/buddhist"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H20"
-        app:layout_constraintBottom_toBottomOf="@id/H30"/>
+        app:layout_constraintTop_toTopOf="@id/H15"
+        app:layout_constraintBottom_toBottomOf="@id/H25"/>
 
     <TextView
         android:id="@+id/vernacularTxt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="佛經白話文"
-        android:textSize="18dp"
+        android:textSize="23dp"
         android:gravity="center"
+        android:fontFamily="@font/buddhist"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H30"
-        app:layout_constraintBottom_toBottomOf="@id/H50"/>
+        app:layout_constraintTop_toTopOf="@id/H25"
+        app:layout_constraintBottom_toBottomOf="@id/H45"/>
 
     <Button
         android:id="@+id/prevBtn"
@@ -203,10 +307,11 @@
         android:layout_height="0dp"
         android:text="←"
         android:textSize="22dp"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V10"
         app:layout_constraintRight_toRightOf="@id/V30"
-        app:layout_constraintTop_toTopOf="@id/H50"
-        app:layout_constraintBottom_toBottomOf="@id/H60"/>
+        app:layout_constraintTop_toTopOf="@id/H45"
+        app:layout_constraintBottom_toBottomOf="@id/H55"/>
 
     <Button
         android:id="@+id/nextBtn"
@@ -214,29 +319,33 @@
         android:layout_height="0dp"
         android:text="→"
         android:textSize="22dp"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V70"
         app:layout_constraintRight_toRightOf="@id/V90"
-        app:layout_constraintTop_toTopOf="@id/H50"
-        app:layout_constraintBottom_toBottomOf="@id/H60"/>
+        app:layout_constraintTop_toTopOf="@id/H45"
+        app:layout_constraintBottom_toBottomOf="@id/H55"/>
 
     <TextView
         android:id="@+id/pageTxt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="第幾頁"
-        android:textSize="20dp"
+        android:textSize="26dp"
         android:gravity="center"
+        android:fontFamily="@font/buddhist"
         app:layout_constraintLeft_toLeftOf="@id/V30"
         app:layout_constraintRight_toRightOf="@id/V70"
-        app:layout_constraintTop_toTopOf="@id/H50"
-        app:layout_constraintBottom_toBottomOf="@id/H60"/>
+        app:layout_constraintTop_toTopOf="@id/H45"
+        app:layout_constraintBottom_toBottomOf="@id/H55"/>
 
     <Button
         android:id="@+id/chiSynBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="中文語音合成"
-        android:textSize="22dp"
+        android:textSize="26dp"
+        android:fontFamily="@font/buddhist"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
         app:layout_constraintTop_toTopOf="@id/H60"
@@ -247,21 +356,25 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="台語語音合成"
-        android:textSize="22dp"
+        android:textSize="26dp"
+        android:fontFamily="@font/buddhist"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H70"
-        app:layout_constraintBottom_toBottomOf="@id/H80"/>
+        app:layout_constraintTop_toTopOf="@id/H725"
+        app:layout_constraintBottom_toBottomOf="@id/H825"/>
 
     <Button
         android:id="@+id/backBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="返回"
-        android:textSize="22dp"
+        android:textSize="26dp"
+        android:fontFamily="@font/buddhist"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
-        app:layout_constraintTop_toTopOf="@id/H80"
-        app:layout_constraintBottom_toBottomOf="@id/H90"/>
+        app:layout_constraintTop_toTopOf="@id/H85"
+        app:layout_constraintBottom_toBottomOf="@id/H95"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

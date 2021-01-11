@@ -174,6 +174,18 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="1.0"/>
 
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/recogbg"
+        app:layout_constraintBottom_toBottomOf="@id/H100"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@id/V0"
+        app:layout_constraintRight_toRightOf="@id/V100"
+        app:layout_constraintTop_toTopOf="@id/H0"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/titleTxt"
         android:layout_width="0dp"
@@ -220,6 +232,7 @@
         android:text="佛經片段語音辨識"
         android:textSize="22dp"
         android:fontFamily="@font/buddhist"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V10"
         app:layout_constraintRight_toRightOf="@id/V90"
         app:layout_constraintTop_toTopOf="@id/H40"
@@ -245,6 +258,7 @@
         android:text="搜尋"
         android:textSize="24dp"
         android:fontFamily="@font/buddhist"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V30"
         app:layout_constraintRight_toLeftOf="@id/V70"
         app:layout_constraintTop_toTopOf="@id/H60"
@@ -256,7 +270,7 @@
         android:layout_height="0dp"
         android:src="@drawable/reset"
         android:scaleType="fitCenter"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         app:layout_constraintLeft_toLeftOf="@id/V75"
         app:layout_constraintRight_toRightOf="@id/V85"
         app:layout_constraintTop_toTopOf="@id/H60"
@@ -268,8 +282,8 @@
         android:layout_height="0dp"
         android:text=""
         android:textSize="22dp"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/buddhist"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="@id/V20"
         app:layout_constraintRight_toRightOf="@id/V80"
         app:layout_constraintTop_toTopOf="@id/H70"
@@ -282,6 +296,7 @@
         android:text="進入導讀"
         android:textSize="24dp"
         android:fontFamily="@font/buddhist"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintLeft_toLeftOf="@id/V30"
         app:layout_constraintRight_toLeftOf="@id/V70"
         app:layout_constraintTop_toTopOf="@id/H80"
